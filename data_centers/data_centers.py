@@ -31,7 +31,6 @@ def outages(triangle, data_centers):
     [triangle[0],triangle[1]+triangle[2]],
     [triangle[0]+triangle[2], triangle[1]]
     ]
-
     for data in data_centers:
         if(isInside(ta[0][0],ta[0][1],ta[1][0],ta[1][1],ta[2][0],ta[2][1],data[0],data[1])):
             ret += 1
@@ -40,10 +39,14 @@ def outages(triangle, data_centers):
 def main():
     data_centers = []
     triangles = []
-    op = open("data_centers.txt", "r")
-    op = [line[:-1] for line in op]
+    op = open("data_center.txt", "r")
+    op = [line for line in op]
     op = [i.split(' ') for i in op]
+    op = op[1:]
+
     for i in op:
+        i[-1] = i[-1].replace('\n','')
+        
         if len(i) == 2:
             data_centers.append([int(j) for j in i])
         elif len(i) == 3:
@@ -52,11 +55,10 @@ def main():
 
     for i in triangles:
         ret.append(str(outages(i, data_centers))+'\n')
-
+    
     a = open("ret.txt","a")
     a.writelines(ret)
-    a.close() 
-
+    a.close()
 
 if __name__ == "__main__":
     main()
