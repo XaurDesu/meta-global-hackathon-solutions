@@ -21,6 +21,7 @@ def main():
     ret = open("solution.txt", "w")
     ret.write(str(rollercoaster(n)))
     ret.close()
+    
 
 if __name__ == "__main__":
     main()
